@@ -27,48 +27,48 @@ public class Login_Form extends javax.swing.JFrame {
      */
     public Login_Form() {
         initComponents();
-        
+
         /* - Download The Connector For JAVA & MYSQL database */
         /* LINK -> https://dev.mysql.com/downloads/connector/j/5.1.html */
         /* OPEN XAMPP and Strat Apache & Mysql */
         /* Go to -> http://localhost/phpmyadmin and create a new database */
         /* Create a Connection with the database */
-        
+
         // Hiển thị form ra giữa màn hình
         this.setLocationRelativeTo(null);
-        
-        
+
+
         // Tạo  đường biên màu vàng cho jpanel_title
         Border jpanel_title_border = BorderFactory.createMatteBorder(0, 1, 1, 1, Color.yellow);
-        
+
         // gán border cho JPanel_title
         jPanel_title.setBorder(jpanel_title_border);
-        
-        
+
+
         // Tạo biên cam cho panel trên đầu
         Border glob_panel_border = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.orange);
         jPanel1.setBorder(glob_panel_border);
-        
-        
+
+
         // Tạo border màu đen cho 2 label minimize và close
         Border label_border = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black);
         jLabel_minimize.setBorder(label_border);
         jLabel_close.setBorder(label_border);
-        
+
         // create a border for the create acconut jlabel
         Border label_create_accont_border = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.lightGray);
         jLabel_Create_Account.setBorder(label_create_accont_border);
-        
+
         // create a border with the color of the parent jpanel for the icons label to remove the move
         Border label_icons_border = BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(153,153,153));
         jLabel_username.setBorder(label_icons_border);
         jLabel_password.setBorder(label_icons_border);
-        
+
         // create border for the username and password field
         Border field_border = BorderFactory.createMatteBorder(1, 5, 1, 1, Color.white);
         jTextField_Username.setBorder(field_border);
         jPasswordField.setBorder(field_border);
-        
+
     }
 
     /**
@@ -322,130 +322,130 @@ public class Login_Form extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel_minimizeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_minimizeMouseEntered
-        
+
         Border label_border = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.white);
         jLabel_minimize.setBorder(label_border);
         jLabel_minimize.setForeground(Color.white);
     }//GEN-LAST:event_jLabel_minimizeMouseEntered
 
     private void jLabel_minimizeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_minimizeMouseExited
-        
+
         Border label_border = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black);
         jLabel_minimize.setBorder(label_border);
         jLabel_minimize.setForeground(Color.black);
-        
+
     }//GEN-LAST:event_jLabel_minimizeMouseExited
 
     private void jLabel_closeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_closeMouseEntered
-        
+
         Border label_border = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.white);
         jLabel_close.setBorder(label_border);
         jLabel_close.setForeground(Color.white);
-        
+
     }//GEN-LAST:event_jLabel_closeMouseEntered
 
     private void jLabel_closeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_closeMouseExited
-        
+
         Border label_border = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black);
         jLabel_close.setBorder(label_border);
         jLabel_close.setForeground(Color.black);
-        
+
     }//GEN-LAST:event_jLabel_closeMouseExited
 
     private void jTextField_UsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_UsernameFocusGained
-        
+
         // clear the textfield on focus if the text is "username"
         if(jTextField_Username.getText().trim().toLowerCase().equals("username"))
         {
             jTextField_Username.setText("");
             jTextField_Username.setForeground(Color.black);
         }
-        
+
         // set a yellow border to the jlabel icon
         Border jlabel_icon = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.yellow);
         jLabel_username.setBorder(jlabel_icon);
-        
+
     }//GEN-LAST:event_jTextField_UsernameFocusGained
 
     private void jTextField_UsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_UsernameFocusLost
-        
+
         // if the text field is equal to username or empty
-        // we will set the "username" text in the field 
+        // we will set the "username" text in the field
         // on focus lost event
-        
-        if(jTextField_Username.getText().trim().equals("") || 
+
+        if(jTextField_Username.getText().trim().equals("") ||
            jTextField_Username.getText().trim().toLowerCase().equals("username"))
         {
             jTextField_Username.setText("username");
             jTextField_Username.setForeground(new Color(153,153,153));
         }
-        
+
         // create a border with the color of the parent jpanel for the icons label to remove the move
         Border label_icons_border = BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(153,153,153));
         jLabel_username.setBorder(label_icons_border);
-        
+
     }//GEN-LAST:event_jTextField_UsernameFocusLost
 
     private void jPasswordFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordFieldFocusGained
-        
+
         // clear the password field on focus if the text is "password"
-        
+
         // get the password text
         String pass = String.valueOf(jPasswordField.getPassword());
-        
+
         if(pass.trim().toLowerCase().equals("password"))
         {
             jPasswordField.setText("");
             jPasswordField.setForeground(Color.black);
         }
-        
+
         // set a yellow border to the jlabel icon
         Border jlabel_icon = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.yellow);
         jLabel_password.setBorder(jlabel_icon);
-        
-        
+
+
     }//GEN-LAST:event_jPasswordFieldFocusGained
 
     private void jPasswordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordFieldFocusLost
-      
+
         // if the password field is equal to password or empty
-        // we will set the "password" text in the field 
+        // we will set the "password" text in the field
         // on focus lost event
-        
+
         // get the password text
         String pass = String.valueOf(jPasswordField.getPassword());
-        
-        if(pass.trim().equals("") || 
+
+        if(pass.trim().equals("") ||
            pass.trim().toLowerCase().equals("password"))
         {
             jPasswordField.setText("password");
             jPasswordField.setForeground(new Color(153,153,153));
         }
-        
+
         // create a border with the color of the parent jpanel for the icons label to remove the move
         Border label_icons_border = BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(153,153,153));
         jLabel_password.setBorder(label_icons_border);
-        
+
     }//GEN-LAST:event_jPasswordFieldFocusLost
 
     private void jButton_LoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_LoginMouseEntered
-        
+
         // set jbutton background
         jButton_Login.setBackground(new Color(0,101,183));
-        
+
     }//GEN-LAST:event_jButton_LoginMouseEntered
 
     private void jButton_LoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_LoginMouseExited
-       
+
         // set jbutton background
         jButton_Login.setBackground(new Color(0,84,104));
-        
+
     }//GEN-LAST:event_jButton_LoginMouseExited
 
     private void jLabel_minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_minimizeMouseClicked
-        
+
         this.setState(JFrame.ICONIFIED);
-        
+
     }//GEN-LAST:event_jLabel_minimizeMouseClicked
 
     private void jLabel_closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_closeMouseClicked
@@ -453,17 +453,17 @@ public class Login_Form extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel_closeMouseClicked
 
     private void jButton_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LoginActionPerformed
-        
+
         PreparedStatement st;
         ResultSet rs;
-        
+
         //lấy username và password được nhập
         String username = jTextField_Username.getText();
         String password = String.valueOf(jPasswordField.getPassword());
-        
+
         //tạo câu lệnh database để kiểm tra xem tài khoản này có trong db k??
         String query = "SELECT * FROM `users` WHERE `username` = ? AND `password` = ?";
-        
+
         //neu username hoặc password bị bỏ trống thì hiện thông báo
         if(username.trim().equals("username"))
         {
@@ -474,7 +474,7 @@ public class Login_Form extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Nhập mật khẩu", "Mật khẩu trống", 2);
         }
         else{
-            
+
             try {
                 //chuẩn bị câu lệnh sql
             st = My_CNX.getConnection().prepareStatement(query);
@@ -483,7 +483,7 @@ public class Login_Form extends javax.swing.JFrame {
             st.setString(2, password);
                 //chạy lệnh sql
             rs = st.executeQuery();
-            
+
             //nếu tìm thấy dữ liệu
             if(rs.next())
             {
@@ -494,42 +494,42 @@ public class Login_Form extends javax.swing.JFrame {
                 form.setLocationRelativeTo(null);
                 // đóng login form
                 this.dispose();
-                
+
             }else{
                 // error message
                 JOptionPane.showMessageDialog(null, "Tên đăng nhập/ mật khẩu sai","Lỗi đăng nhập",2);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Login_Form.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
+
         }
-        
+
     }//GEN-LAST:event_jButton_LoginActionPerformed
 
     private void jLabel_Create_AccountMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Create_AccountMouseEntered
-        
+
         Border label_border = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.red);
         jLabel_Create_Account.setBorder(label_border);
-        
+
     }//GEN-LAST:event_jLabel_Create_AccountMouseEntered
 
     private void jLabel_Create_AccountMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Create_AccountMouseExited
-       
+
         Border label_create_accont_border = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.lightGray);
         jLabel_Create_Account.setBorder(label_create_accont_border);
-        
+
     }//GEN-LAST:event_jLabel_Create_AccountMouseExited
 
     private void jLabel_Create_AccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_Create_AccountMouseClicked
-        
+
         Register_Form rf = new Register_Form();
         rf.setVisible(true);
         rf.pack();
         rf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
-        
+
     }//GEN-LAST:event_jLabel_Create_AccountMouseClicked
 
     /**
@@ -539,7 +539,7 @@ public class Login_Form extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

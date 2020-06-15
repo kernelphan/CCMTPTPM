@@ -17,26 +17,26 @@ public class My_CNX {
     private static String dbname  = "java_db";
     private static Integer portnumber  = 3306;
     private static String password = "mypassword";
-    
+
     public static Connection getConnection()
     {
         Connection cnx = null;
-        
+
         MysqlDataSource datasource = new MysqlDataSource();
-        
+
         datasource.setServerName(servername);
         datasource.setUser(username);
         datasource.setPassword(password);
         datasource.setDatabaseName(dbname);
         datasource.setPortNumber(portnumber);
-        
+
         try {
             cnx = datasource.getConnection();
         } catch (SQLException ex) {
             Logger.getLogger(" Get Connection -> " + My_CNX.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return cnx;
     }
-    
+
 }

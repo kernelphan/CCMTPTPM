@@ -32,32 +32,32 @@ public class Register_Form extends javax.swing.JFrame {
     /**
      * Creates new form Register_Form
      */
-    
+
     // create a variable to set the image path in it
     String image_path = null;
-    
+
     public Register_Form() {
         initComponents();
-        
+
         // center form
         this.setLocationRelativeTo(null);
-        
+
         // create a yellow border for the jpanel_title
         // 0 border in the top
         Border jpanel_title_border = BorderFactory.createMatteBorder(0, 1, 1, 1, Color.yellow);
         // set the border to the jPanel_title
         jPanel_title.setBorder(jpanel_title_border);
-        
+
         // create a black border for the close & minimize jlables
         Border label_border = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black);
         jLabel_minimize.setBorder(label_border);
         jLabel_close.setBorder(label_border);
-        
+
         // create a border for the create acconut jlabel
         Border label_login_border = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.lightGray);
         jLabel_login.setBorder(label_login_border);
-        
-        
+
+
         // create border for the text and password fields
         Border field_border = BorderFactory.createMatteBorder(1, 5, 1, 1, Color.white);
         jTextField_Username.setBorder(field_border);
@@ -65,7 +65,7 @@ public class Register_Form extends javax.swing.JFrame {
         jTextField_Phone.setBorder(field_border);
         jPasswordField_1.setBorder(field_border);
         jPasswordField_2.setBorder(field_border);
-        
+
         // create a button group for the radiobuttons
         ButtonGroup bg = new ButtonGroup();
         bg.add(jRadioButton_Male);
@@ -430,11 +430,11 @@ public class Register_Form extends javax.swing.JFrame {
          String pass2 = String.valueOf(jPasswordField_2.getPassword());
          String phone = jTextField_Phone.getText();
          String gender = "Male";
-         
+
          if(jRadioButton_Female.isSelected()){
              gender = "Female";
          }
-        
+
          if(verifyFields())
          {
              if(!checkUsername(username))
@@ -442,46 +442,46 @@ public class Register_Form extends javax.swing.JFrame {
                  PreparedStatement ps;
                  ResultSet rs;
                  String registerUserQuery = "INSERT INTO `users`(`full_name`, `username`, `password`, `phone`, `gender`, `picture`) VALUES (?,?,?,?,?,?)";
-                 
+
                  try {
-                     
+
                      ps = My_CNX.getConnection().prepareStatement(registerUserQuery);
                      ps.setString(1, fname);
                      ps.setString(2, username);
                      ps.setString(3, pass1);
                      ps.setString(4, phone);
                      ps.setString(5, gender);
-                     
+
                      try {
-                         
+
                          // save the image as blob in the database
                          if(image_path != null){
-                         
+
                              InputStream image = new FileInputStream(new File(image_path));
                              ps.setBlob(6, image);
-                             
+
                          }else{
                              ps.setNull(6, java.sql.Types.NULL);
                          }
-                         
+
                          if(ps.executeUpdate() != 0){
                              JOptionPane.showMessageDialog(null, "Tài khoản đã được tạo");
                          }else{
                              JOptionPane.showMessageDialog(null, "Lỗi: Kiểm tra lại thông tin");
                          }
-                         
+
                      } catch (FileNotFoundException ex) {
                          Logger.getLogger(Register_Form.class.getName()).log(Level.SEVERE, null, ex);
                      }
-                     
+
                  } catch (SQLException ex) {
                      Logger.getLogger(Register_Form.class.getName()).log(Level.SEVERE, null, ex);
                  }
-                 
+
              }
          }
-         
-        
+
+
     }//GEN-LAST:event_jButton_RegisterActionPerformed
 
     private void jLabel_minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_minimizeMouseClicked
@@ -526,7 +526,7 @@ public class Register_Form extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel_closeMouseExited
 
     private void jTextField_PhoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_PhoneKeyTyped
-        
+
        // allow only numbers
        if(!Character.isDigit(evt.getKeyChar())){
            evt.consume();
@@ -536,27 +536,27 @@ public class Register_Form extends javax.swing.JFrame {
     private void jButton_SelectImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SelectImageActionPerformed
         // select an image and set the image path into a jlabel
         String path = null;
-        
+
         JFileChooser chooser = new JFileChooser();
-        
+
         chooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-        
+
         // file extension
         FileNameExtensionFilter extension = new FileNameExtensionFilter("*.Images","jpg","png","jpeg");
         chooser.addChoosableFileFilter(extension);
-        
+
         int filestate = chooser.showSaveDialog(null);
-         
+
         // check if the user select an image
         if(filestate == JFileChooser.APPROVE_OPTION){
-            
+
             File selectedImage = chooser.getSelectedFile();
             path = selectedImage.getAbsolutePath();
             jLabel_imgpath.setText(path);
-            
+
             image_path = path;
         }
-        
+
     }//GEN-LAST:event_jButton_SelectImageActionPerformed
 
     private void jLabel_loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_loginMouseClicked
@@ -583,7 +583,7 @@ public class Register_Form extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jLabel_loginMouseExited
 
-// create a function to verify the empty fields  
+// create a function to verify the empty fields
     public boolean verifyFields()
     {
         String fname = jTextField_Fullname.getText();
@@ -591,7 +591,7 @@ public class Register_Form extends javax.swing.JFrame {
         String phone = jTextField_Phone.getText();
         String pass1 = String.valueOf(jPasswordField_1.getPassword());
         String pass2 = String.valueOf(jPasswordField_2.getPassword());
-        
+
         // check empty fields
         if(fname.trim().equals("") || uname.trim().equals("") || phone.trim().equals("")
            || pass1.trim().equals("") || pass2.trim().equals(""))
@@ -599,50 +599,50 @@ public class Register_Form extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Chưa ghi đủ thông tin","Thông tin trống",2);
             return false;
         }
-        
+
         // check if the two password are equals
         else if(!pass1.equals(pass2))
         {
-           JOptionPane.showMessageDialog(null, "Mật khẩu không trùng","Xác nhận mật khẩu",2); 
+           JOptionPane.showMessageDialog(null, "Mật khẩu không trùng","Xác nhận mật khẩu",2);
            return false;
         }
-        
+
         // if everything is ok
         else{
             return true;
         }
     }
-    
-    
+
+
     // create a unction to check if the entred username already exists in the database
     public boolean checkUsername(String username){
-        
+
         PreparedStatement st;
         ResultSet rs;
         boolean username_exist = false;
-        
+
         String query = "SELECT * FROM `users` WHERE `username` = ?";
-        
+
         try {
-            
+
             st = My_CNX.getConnection().prepareStatement(query);
             st.setString(1, username);
             rs = st.executeQuery();
-        
+
             if(rs.next())
             {
                 username_exist = true;
                 JOptionPane.showMessageDialog(null, "Tên đăng nhập đã được sử dụng", "Lỗi tên đăng nhập", 2);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Register_Form.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return username_exist;
     }
-    
-    
+
+
     /**
      * @param args the command line arguments
      */
@@ -650,7 +650,7 @@ public class Register_Form extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

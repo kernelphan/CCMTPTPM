@@ -46,7 +46,7 @@ public class Shop_Form extends javax.swing.JFrame {
     }
     String ImgPath = null;
     int pos = 0;
-    
+
     // Hàm kiểm tra giá trị của các textbox
     public boolean checkInputs()
     {
@@ -66,21 +66,21 @@ public class Shop_Form extends javax.swing.JFrame {
     public ImageIcon ResizeImage(String imagePath, byte[] pic)
     {
         ImageIcon myImage = null;
-        
+
         if(imagePath != null)
         {
             myImage = new ImageIcon(imagePath);
         }else{
             myImage = new ImageIcon(pic);
         }
-        
+
         Image img = myImage.getImage();
         Image img2 = img.getScaledInstance(lbl_image.getWidth(), lbl_image.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon image = new ImageIcon(img2);
         return image;
-        
+
     }
-    
+
     //Hiển thị dữ liệu lên JTable
     // 1 -  Đổ Data vào mảng Product
     public ArrayList<Shop> getShopList()
@@ -88,37 +88,37 @@ public class Shop_Form extends javax.swing.JFrame {
             ArrayList<Shop> shopList  = new ArrayList<Shop>();
             Connection con = My_CNX.getConnection();
             String query = "SELECT * FROM shop";
-            
+
             Statement st;
             ResultSet rs;
-            
+
         try {
-            
+
             st = con.createStatement();
             rs = st.executeQuery(query);
             Shop shop;
-            
+
             while(rs.next())
             {
                 shop = new Shop(rs.getInt("shopid"),rs.getString("name"),rs.getString("address"),rs.getString("phone"),rs.getString("add_date"),rs.getBytes("image"));
                 shopList.add(shop);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Main_Window.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return shopList; 
-                
+
+        return shopList;
+
     }
     //      2 - Đưa dlsp lên JTable
-    
+
     public void Show_Shop_In_JTable()
     {
         ArrayList<Shop> list = getShopList();
         DefaultTableModel model = (DefaultTableModel)JTable_Shop.getModel();
         // clear jtable content
-       
+
         model.setRowCount(0);
         Object[] row = new Object[5];
         for(int i = 0; i < list.size(); i++)
@@ -128,12 +128,12 @@ public class Shop_Form extends javax.swing.JFrame {
             row[2] = list.get(i).getAddress();
             row[3] = list.get(i).getPhone();
             row[4] = list.get(i).getAddDate();
-            
+
             model.addRow(row);
         }
-    
+
     }
-    
+
     //Hàm xóa các TextField
     public void setNull()
     {
@@ -144,7 +144,7 @@ public class Shop_Form extends javax.swing.JFrame {
         this.lbl_image.setIcon(null);
         this.txt_name.requestFocus();
     }
-    
+
     //Hàm khóa các TextField
     public void setKhoa(boolean a)
     {
@@ -155,7 +155,7 @@ public class Shop_Form extends javax.swing.JFrame {
         this.txt_AddDate.setEnabled(!a);
         this.Btn_Choose_Image.setEnabled(!a);
     }
-    
+
     //Hàm khóa các Button
     public void setButton(boolean a)
     {
@@ -164,9 +164,9 @@ public class Shop_Form extends javax.swing.JFrame {
         this.Btn_Delete.setEnabled(a);
         this.Btn_Update.setEnabled(a);
         this.Btn_Save.setEnabled(!a);
-        
+
     }
-    
+
     // hiện dữ liệu trên input
     public void ShowItem(int index)
     {
@@ -174,8 +174,8 @@ public class Shop_Form extends javax.swing.JFrame {
             txt_name.setText(getShopList().get(index).getName());
             txt_address.setText(getShopList().get(index).getAddress());
             txt_phone.setText(getShopList().get(index).getPhone());
-            
-            
+
+
         try {
            Date addDate = null;
             addDate = new SimpleDateFormat("dd-MM-yyyy").parse((String)getShopList().get(index).getAddDate());
@@ -183,7 +183,7 @@ public class Shop_Form extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(Main_Window.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         lbl_image.setIcon(ResizeImage(null, getShopList().get(index).getPicture()));
     }
 
@@ -623,7 +623,7 @@ public class Shop_Form extends javax.swing.JFrame {
             try {
                 Connection con = My_CNX.getConnection();
                 PreparedStatement ps = con.prepareStatement("INSERT INTO shop(name,address,phone,add_date,image)" + " values(?,?,?,?,?) ");
-                
+
                 ps.setString(1, txt_name.getText());
                 ps.setString(2, txt_address.getText());
                 ps.setString(3, txt_phone.getText());
@@ -690,7 +690,7 @@ public class Shop_Form extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

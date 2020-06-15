@@ -70,12 +70,12 @@ public class Shop {
 
     public Shop() {
     }
-    
+
     private int shopid;
     private String name;
     private String address;
     private String phone;
     private String addDate;
     private byte[] picture;
-    
+
 }

@@ -66,13 +66,13 @@ public class User {
     public void setPicture(byte[] picture) {
         this.picture = picture;
     }
-    
+
     private int id;
     private String full_name;
     private String username;
     private String password;
     private String phone;
-    private String gender; 
+    private String gender;
     private byte[] picture;
 
     public User() {
@@ -87,5 +87,5 @@ public class User {
         this.gender = gender;
         this.picture = picture;
     }
-    
+
 }

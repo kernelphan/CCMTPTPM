@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 
 /**
  *
- * @author 
+ * @author
  */
 public class Menu_Form extends javax.swing.JFrame {
 
@@ -25,7 +25,7 @@ public class Menu_Form extends javax.swing.JFrame {
         // Set vị trí của form ở giữa màn hình
         this.setLocationRelativeTo(null);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -173,12 +173,12 @@ public class Menu_Form extends javax.swing.JFrame {
 
     private void btn_mainwindowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_mainwindowActionPerformed
         // TODO add your handling code here:
-        
+
         // tạo form main_window
         Main_Window form = new Main_Window();
         //Cho form hiện
         form.setVisible(true);
-        //phương thức pack giúp frame có kích thước vừa đủ với nội dung của frame 
+        //phương thức pack giúp frame có kích thước vừa đủ với nội dung của frame
         form.pack();
         //Khởi tạo form tại giữ màn hình
         form.setLocationRelativeTo(null);
@@ -233,7 +233,7 @@ public class Menu_Form extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

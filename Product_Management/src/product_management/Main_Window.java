@@ -52,15 +52,15 @@ public class Main_Window extends javax.swing.JFrame {
         // Show dữ liệu lên JTable
         Show_Products_In_JTable();
     }
-    
+
     String ImgPath = null;
     int pos = 0;
 
-    // hàm kết nối với MySQL Database 
+    // hàm kết nối với MySQL Database
     public Connection getConnection()
     {
         Connection con = null;
-        
+
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost/java_db","root","mypassword");
             return con;
@@ -93,21 +93,21 @@ public class Main_Window extends javax.swing.JFrame {
     public ImageIcon ResizeImage(String imagePath, byte[] pic)
     {
         ImageIcon myImage = null;
-        
+
         if(imagePath != null)
         {
             myImage = new ImageIcon(imagePath);
         }else{
             myImage = new ImageIcon(pic);
         }
-        
+
         Image img = myImage.getImage();
         Image img2 = img.getScaledInstance(lbl_image.getWidth(), lbl_image.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon image = new ImageIcon(img2);
         return image;
-        
+
     }
-    
+
     //Truy vấn các dòng dl table category theo cateid
     //Sử  dụng HashMap để truy xuất được id và value bên trong combobox.
     public HashMap<String,String> list = new HashMap<>();
@@ -115,9 +115,9 @@ public class Main_Window extends javax.swing.JFrame {
     {
         Connection con = My_CNX.getConnection();
         String query = "SELECT * FROM category";
-            
+
         Statement st;
-        
+
         try {
             st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -131,9 +131,9 @@ public class Main_Window extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Main_Window.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
+
     //Hiển thị dữ liệu lên JTable
     // 1 -  Đổ Data vào mảng Product
     public ArrayList<Product> getProductList()
@@ -141,28 +141,28 @@ public class Main_Window extends javax.swing.JFrame {
             ArrayList<Product> productList  = new ArrayList<Product>();
             Connection con = getConnection();
             String query = "SELECT * FROM products";
-            
+
             Statement st;
             ResultSet rs;
-            
+
         try {
-            
+
             st = con.createStatement();
             rs = st.executeQuery(query);
             Product product;
-            
+
             while(rs.next())
             {
                 product = new Product(rs.getInt("id"),rs.getInt("cateid"),rs.getString("name"),Float.parseFloat(rs.getString("price")),rs.getString("add_date"),rs.getBytes("image"));
                 productList.add(product);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Main_Window.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return productList; 
-                
+
+        return productList;
+
     }
     //      2 - Đưa dlsp lên JTable
     public void Show_Products_In_JTable()
@@ -170,7 +170,7 @@ public class Main_Window extends javax.swing.JFrame {
         ArrayList<Product> list = getProductList();
         DefaultTableModel model = (DefaultTableModel)JTable_Products.getModel();
         // clear jtable content
-       
+
         model.setRowCount(0);
         Object[] row = new Object[4];
         for(int i = 0; i < list.size(); i++)
@@ -179,12 +179,12 @@ public class Main_Window extends javax.swing.JFrame {
             row[1] = list.get(i).getName();
             row[2] = list.get(i).getPrice();
             row[3] = list.get(i).getAddDate();
-            
+
             model.addRow(row);
         }
-    
+
     }
-    
+
     //Hàm xóa các TextField
     public void setNull()
     {
@@ -194,7 +194,7 @@ public class Main_Window extends javax.swing.JFrame {
         this.lbl_image.setIcon(null);
         this.txt_name.requestFocus();
     }
-    
+
     //Hàm khóa các TextField
     public void setKhoa(boolean a)
     {
@@ -204,7 +204,7 @@ public class Main_Window extends javax.swing.JFrame {
         this.txt_AddDate.setEnabled(!a);
         this.Btn_Choose_Image.setEnabled(!a);
     }
-    
+
     //Hàm khóa các Button
     public void setButton(boolean a)
     {
@@ -213,9 +213,9 @@ public class Main_Window extends javax.swing.JFrame {
         this.Btn_Delete.setEnabled(a);
         this.Btn_Update.setEnabled(a);
         this.Btn_Save.setEnabled(!a);
-        
+
     }
-    
+
     // hiện dữ liệu trên input
     public void ShowItem(int index)
     {
@@ -223,8 +223,8 @@ public class Main_Window extends javax.swing.JFrame {
             cboLoaiSP.setSelectedItem(getProductList().get(index).getCateID());
             txt_name.setText(getProductList().get(index).getName());
             txt_price.setText(Float.toString(getProductList().get(index).getPrice()));
-            
-            
+
+
         try {
            Date addDate = null;
             addDate = new SimpleDateFormat("dd-MM-yyyy").parse((String)getProductList().get(index).getAddDate());
@@ -232,10 +232,10 @@ public class Main_Window extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(Main_Window.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         lbl_image.setIcon(ResizeImage(null, getProductList().get(index).getImage()));
     }
-    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -545,7 +545,7 @@ public class Main_Window extends javax.swing.JFrame {
         // TODO add your handling code here:
          JFileChooser file = new JFileChooser();
         file.setCurrentDirectory(new File(System.getProperty("user.home")));
-       
+
         FileNameExtensionFilter filter = new FileNameExtensionFilter("*.images", "jpg","png");
         file.addChoosableFileFilter(filter);
         int result = file.showSaveDialog(null);
@@ -561,8 +561,8 @@ public class Main_Window extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Btn_Choose_ImageActionPerformed
 
-    
-   
+
+
     // nút truyền dữ liệu vào db
     // kiểm tra ảnh vs các text nhập vào có null không
     // truyền dữ liệu
@@ -574,10 +574,10 @@ public class Main_Window extends javax.swing.JFrame {
        setButton(false);
     }//GEN-LAST:event_Btn_InsertActionPerformed
 
-    
+
     //nút update data
     //kiểm tra  xem text có null không
-    //nếu không có image thì không update image 
+    //nếu không có image thì không update image
     private void Btn_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_UpdateActionPerformed
         // TODO add your handling code here:
         if(checkInputs() && txt_id.getText() != null)
@@ -585,7 +585,7 @@ public class Main_Window extends javax.swing.JFrame {
             String UpdateQuery = null;
             PreparedStatement ps = null;
             Connection con = getConnection();
-           
+
             //update mà không cần image
             if(ImgPath == null)
             {
@@ -593,54 +593,54 @@ public class Main_Window extends javax.swing.JFrame {
                     UpdateQuery = "UPDATE products SET cateid = ?, name = ?, price = ?"
                             + ", add_date = ? WHERE id = ?";
                     ps = con.prepareStatement(UpdateQuery);
-                   
+
                     ps.setString(1, list.get(cboLoaiSP.getSelectedItem().toString()));
                     ps.setString(2, txt_name.getText());
                     ps.setString(3, txt_price.getText());
-                   
+
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                     String addDate = dateFormat.format(txt_AddDate.getDate());
-                   
+
                     ps.setString(4, addDate);
-                   
+
                     ps.setInt(5, Integer.parseInt(txt_id.getText()));
-                   
+
                     ps.executeUpdate();
                     Show_Products_In_JTable();
                     JOptionPane.showMessageDialog(null, "Đã cập nhật sản phẩm");
-                   
+
                 } catch (SQLException ex) {
                     Logger.getLogger(Main_Window.class.getName()).log(Level.SEVERE, null, ex);
                 }
-               
+
             }
             // update có image
             else{
                 try{
                 InputStream img = new FileInputStream(new File(ImgPath));
-               
+
                  UpdateQuery = "UPDATE products SET cateid = ?, name = ?, price = ?"
                             + ", add_date = ?, image = ? WHERE id = ?";
-               
+
                   ps = con.prepareStatement(UpdateQuery);
-                   
+
                      ps.setString(1, list.get(cboLoaiSP.getSelectedItem().toString()));
                     ps.setString(2, txt_name.getText());
                     ps.setString(3, txt_price.getText());
-                   
+
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                     String addDate = dateFormat.format(txt_AddDate.getDate());
-                   
+
                     ps.setString(4, addDate);
-                   
+
                     ps.setBlob(5, img);
-                   
+
                     ps.setInt(6, Integer.parseInt(txt_id.getText()));
-                   
+
                     ps.executeUpdate();
                     Show_Products_In_JTable();
                     JOptionPane.showMessageDialog(null, "Đã cập nhật sản phẩm");
-               
+
                 }catch(Exception ex)
                 {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -650,8 +650,8 @@ public class Main_Window extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Dữ liệu còn thiếu, vui lòng nhập thêm");
         }
     }//GEN-LAST:event_Btn_UpdateActionPerformed
- 
-    
+
+
     // Xóa dữ liệu từ Database
     private void Btn_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_DeleteActionPerformed
         // TODO add your handling code here:
@@ -669,19 +669,19 @@ public class Main_Window extends javax.swing.JFrame {
                 //Xóa dữ liệu trong TextField
                 setNull();
                 }
-               
+
             } catch (SQLException ex) {
                 Logger.getLogger(Main_Window.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(null, "Xóa thất bại");
             }
-         
+
         }else{
             JOptionPane.showMessageDialog(null, "Chọn 1 sản phẩm để xóa","Thông báo", 1);
         }
     }//GEN-LAST:event_Btn_DeleteActionPerformed
 
-    
-    
+
+
     // Click chuột vào JTable để show dữ liệu lên JTextFields và Hình ảnh vào JLabel
     private void JTable_ProductsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTable_ProductsMouseClicked
         // TODO add your handling code here:
@@ -697,7 +697,7 @@ public class Main_Window extends javax.swing.JFrame {
         ShowItem(pos);
     }//GEN-LAST:event_Btn_FirstActionPerformed
 
-    
+
     // Button trỏ về dữ liệu cuối cùng
     private void Btn_LastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_LastActionPerformed
         // TODO add your handling code here:
@@ -721,7 +721,7 @@ public class Main_Window extends javax.swing.JFrame {
         Main_Window form = new Main_Window();
         //Cho form hiện
         form.setVisible(true);
-        //phương thức pack giúp frame có kích thước vừa đủ với nội dung của frame 
+        //phương thức pack giúp frame có kích thước vừa đủ với nội dung của frame
         form.pack();
         //Khởi tạo form tại giữ màn hình
         form.setLocationRelativeTo(null);
@@ -742,18 +742,18 @@ public class Main_Window extends javax.swing.JFrame {
                 ps.setString(1, list.get(cboLoaiSP.getSelectedItem().toString()));
                 ps.setString(2, txt_name.getText());
                 ps.setString(3, txt_price.getText());
-               
+
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 String addDate = dateFormat.format(txt_AddDate.getDate());
                 ps.setString(4, addDate);
-               
+
                 InputStream img = new FileInputStream(new File(ImgPath));
                 ps.setBlob(5, img);
                 ps.executeUpdate();
                 setNull();
                 setButton(true);
                 Show_Products_In_JTable();
-               
+
                 JOptionPane.showMessageDialog(null, "Dữ liệu đã được thêm");
             } catch (Exception ex) {
                  JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -761,7 +761,7 @@ public class Main_Window extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Dữ liệu còn thiếu, vui lòng nhập thêm");
         }
-       
+
         // test
         System.out.println("Cate => "+cboLoaiSP.getSelectedItem().toString());
         System.out.println("Name => "+txt_name.getText());
@@ -778,9 +778,9 @@ public class Main_Window extends javax.swing.JFrame {
         // Đóng form hiện tại (Main_Window) mở form Menu (Menu_Form)
         this.dispose();
     }//GEN-LAST:event_Btn_showProductsActionPerformed
-                                       
-                                   
-                               
+
+
+
     /**
      * @param args the command line arguments
      */
@@ -788,7 +788,7 @@ public class Main_Window extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

@@ -36,7 +36,7 @@ public class ShowProducts extends javax.swing.JFrame {
         // hiển thị dữ liệu lên combobox
         ShowLoaiSP();
     }
-    
+
     //Truy vấn các dòng dl table category theo cateid
     //Sử  dụng HashMap để truy xuất được id và value bên trong combobox.
     public HashMap<String,String> list = new HashMap<>();
@@ -44,9 +44,9 @@ public class ShowProducts extends javax.swing.JFrame {
     {
         Connection con = My_CNX.getConnection();
         String query = "SELECT * FROM category";
-            
+
         Statement st;
-        
+
         try {
             st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
@@ -59,81 +59,81 @@ public class ShowProducts extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Main_Window.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
+
     //Hiển thị dữ liệu lên JTable
     // 1 -  Đổ Data vào mảng Product
     public ArrayList<Product> getProductList()
     {
             ArrayList<Product> productList  = new ArrayList<Product>();
             Connection con = My_CNX.getConnection();
-            
+
             String query = "SELECT * FROM products"
                 + " where cateid='"+list.get(cboLoaiSP.getSelectedItem().toString())+"'";
-            
+
             Statement st;
             ResultSet rs;
-            
+
         try {
-            
+
             st = con.createStatement();
             rs = st.executeQuery(query);
             Product product;
-            
+
             while(rs.next())
             {
                 product = new Product(rs.getInt("id"),rs.getInt("cateid"),rs.getString("name"),Float.parseFloat(rs.getString("price")),rs.getString("add_date"),rs.getBytes("image"));
                 productList.add(product);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Main_Window.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return productList; 
-                
+
+        return productList;
+
     }
-    
+
     //      2 - Đưa dlsp lên JTable
      public void Show_Products_In_JTable(int cateid)
     {
         ArrayList<Product> list = getProductList();
         DefaultTableModel model = (DefaultTableModel)JTable_Products.getModel();
         // clear jtable content
-       
+
         model.setRowCount(0);
         Object[] row = new Object[4];
         for(int i = 0; i < list.size(); i++)
         {
             row[0] = list.get(i).getId();
-            row[1] = list.get(i).getName(); 
+            row[1] = list.get(i).getName();
             row[2] = list.get(i).getPrice();
             row[3] = list.get(i).getAddDate();
-            
+
             model.addRow(row);
         }
-    
+
     }
     //Hàm thay đổi kích thước ảnh cho vừa với JLabel
      public ImageIcon ResizeImage(String imagePath, byte[] pic)
     {
         ImageIcon myImage = null;
-        
+
         if(imagePath != null)
         {
             myImage = new ImageIcon(imagePath);
         }else{
             myImage = new ImageIcon(pic);
         }
-        
+
         Image img = myImage.getImage();
         Image img2 = img.getScaledInstance(lbl_image.getWidth(), lbl_image.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon image = new ImageIcon(img2);
         return image;
-        
+
     }
-     
+
      // hiện dữ liệu trên input
      public void ShowItem(int index){
           lbl_image.setIcon(ResizeImage(null, getProductList().get(index).getImage()));
@@ -283,7 +283,7 @@ public class ShowProducts extends javax.swing.JFrame {
         // TODO add your handling code here:
         int index = JTable_Products.getSelectedRow();
         ShowItem(index);
-        
+
     }//GEN-LAST:event_JTable_ProductsMouseClicked
 
     private void cboLoaiSPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboLoaiSPItemStateChanged
@@ -299,7 +299,7 @@ public class ShowProducts extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
