@@ -10,7 +10,7 @@ package product_management;
  * @author kazuto
  */
 public class Category {
-    
+
     private int cateid;
     private String name;
     private String description;
