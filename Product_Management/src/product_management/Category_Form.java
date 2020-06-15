@@ -37,10 +37,10 @@ public class Category_Form extends javax.swing.JFrame {
         // Show dữ liệu lên JTable
         Show_Category_In_JTable();
     }
-    
+
     //Set vị trí ban đầu
     int pos = 0;
-    
+
     // Hàm kiểm tra giá trị của các textbox
     public boolean checkInputs()
     {
@@ -54,7 +54,7 @@ public class Category_Form extends javax.swing.JFrame {
             return true;
         }
     }
-    
+
     //Hiển thị dữ liệu lên JTable
     // 1 -  Đổ Data vào mảng Category
     public ArrayList<Category> getCategoryList()
@@ -62,37 +62,37 @@ public class Category_Form extends javax.swing.JFrame {
             ArrayList<Category> categoryList  = new ArrayList<Category>();
             Connection con = My_CNX.getConnection();
             String query = "SELECT * FROM category";
-            
+
             Statement st;
             ResultSet rs;
-            
+
         try {
-            
+
             st = con.createStatement();
             rs = st.executeQuery(query);
             Category category;
-            
+
             while(rs.next())
             {
                 category = new Category(rs.getInt("cateid"),rs.getString("name"),rs.getString("description"));
                 categoryList.add(category);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Main_Window.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return categoryList;      
+
+        return categoryList;
     }
-    
+
     //      2 - Đưa dlsp lên JTable
-    
+
     public void Show_Category_In_JTable()
     {
         ArrayList<Category> list = getCategoryList();
         DefaultTableModel model = (DefaultTableModel)JTable_Category.getModel();
         // xóa dữ liệu jtable
-       
+
         model.setRowCount(0);
         Object[] row = new Object[3];
         for(int i = 0; i < list.size(); i++)
@@ -100,12 +100,12 @@ public class Category_Form extends javax.swing.JFrame {
             row[0] = list.get(i).getCateid();
             row[1] = list.get(i).getName();
             row[2] = list.get(i).getDescription();
-            
+
             model.addRow(row);
         }
-    
+
     }
-    
+
      //Hàm xóa các TextField
     public void setNull()
     {
@@ -114,7 +114,7 @@ public class Category_Form extends javax.swing.JFrame {
         this.txt_descript.setText(null);
         this.txt_cateName.requestFocus();
     }
-    
+
     //Hàm khóa các TextField
     public void setKhoa(boolean a)
     {
@@ -122,7 +122,7 @@ public class Category_Form extends javax.swing.JFrame {
         this.txt_cateName.setEnabled(!a);
         this.txt_descript.setEnabled(!a);
     }
-    
+
     //Hàm khóa các Button
     public void setButton(boolean a)
     {
@@ -131,9 +131,9 @@ public class Category_Form extends javax.swing.JFrame {
         this.Btn_Delete.setEnabled(a);
         this.Btn_Update.setEnabled(a);
         this.Btn_Save.setEnabled(!a);
-        
+
     }
-    
+
     // hiện dữ liệu trên input
     public void ShowItem(int index)
     {
@@ -146,7 +146,7 @@ public class Category_Form extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
-    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -410,7 +410,7 @@ public class Category_Form extends javax.swing.JFrame {
         //Khóa các button không liên quan
         setButton(false);
 
-        
+
     }//GEN-LAST:event_Btn_InsertActionPerformed
 
     private void Btn_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_UpdateActionPerformed
@@ -495,7 +495,7 @@ public class Category_Form extends javax.swing.JFrame {
         // test
         System.out.println("Name => "+txt_cateName.getText());
         System.out.println("Price => "+txt_descript.getText());
-        
+
     }//GEN-LAST:event_Btn_SaveActionPerformed
 
     private void BtnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRefreshActionPerformed
@@ -527,7 +527,7 @@ public class Category_Form extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
