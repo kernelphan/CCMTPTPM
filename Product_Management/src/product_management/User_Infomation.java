@@ -40,19 +40,19 @@ public class User_Infomation extends javax.swing.JFrame {
         Border jpanel_title_border = BorderFactory.createMatteBorder(0, 1, 1, 1, Color.yellow);
         // set the border to the jPanel_title
         jPanel_title.setBorder(jpanel_title_border);
-        
+
         // create a black border for the close & minimize jlables
         Border label_border = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black);
         jLabel_minimize.setBorder(label_border);
         jLabel_close.setBorder(label_border);
-        
+
         // create a border for the create acconut jlabel
         Border label_login_border = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.lightGray);
         //jLabel_login.setBorder(label_login_border);
-        
-     
+
+
     }
-    
+
     public void Show_Info(){
 //        jLabel_Fullname.setText();
 //        String username = jTextField_Username.getText();
@@ -60,11 +60,11 @@ public class User_Infomation extends javax.swing.JFrame {
 //         String pass2 = String.valueOf(jPasswordField_2.getPassword());
 //         String phone = jTextField_Phone.getText();
 //         String gender = "Male";
-//         
+//
 //         if(jRadioButton_Female.isSelected()){
 //             gender = "Female";
 //         }
-//        
+//
 //         if(verifyFields())
 //         {
 //             if(!checkUsername(username))
@@ -72,42 +72,42 @@ public class User_Infomation extends javax.swing.JFrame {
 //                 PreparedStatement ps;
 //                 ResultSet rs;
 //                 String registerUserQuery = "INSERT INTO `users`(`full_name`, `username`, `password`, `phone`, `gender`, `picture`) VALUES (?,?,?,?,?,?)";
-//                 
+//
 //                 try {
-//                     
+//
 //                     ps = My_CNX.getConnection().prepareStatement(registerUserQuery);
 //                     ps.setString(1, fname);
 //                     ps.setString(2, username);
 //                     ps.setString(3, pass1);
 //                     ps.setString(4, phone);
 //                     ps.setString(5, gender);
-//                     
+//
 //                     try {
-//                         
+//
 //                         // save the image as blob in the database
 //                         if(image_path != null){
-//                         
+//
 //                             InputStream image = new FileInputStream(new File(image_path));
 //                             ps.setBlob(6, image);
-//                             
+//
 //                         }else{
 //                             ps.setNull(6, java.sql.Types.NULL);
 //                         }
-//                         
+//
 //                         if(ps.executeUpdate() != 0){
 //                             JOptionPane.showMessageDialog(null, "Your Account Has Been Created");
 //                         }else{
 //                             JOptionPane.showMessageDialog(null, "Error: Check Your Information");
 //                         }
-//                         
+//
 //                     } catch (FileNotFoundException ex) {
 //                         Logger.getLogger(Register_Form.class.getName()).log(Level.SEVERE, null, ex);
 //                     }
-//                     
+//
 //                 } catch (SQLException ex) {
 //                     Logger.getLogger(Register_Form.class.getName()).log(Level.SEVERE, null, ex);
 //                 }
-//                 
+//
 //             }
 //         }
     }
@@ -344,7 +344,7 @@ public class User_Infomation extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
